@@ -5,6 +5,11 @@ if [[ ! -e $HOME/.oh-my-zsh/ ]] then
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 fi
 
+# link zshrc
+if [[ ! -e $HOME/.zshrc ]] then
+  ln -s $HOME/zdotfiles/.zshrc $HOME/.zshrc
+fi 
+
 if [[ ! -d "$('xcode-select' -print-path 2>/dev/null)" ]] then
   sudo xcode-select -switch /usr/bin
 fi
