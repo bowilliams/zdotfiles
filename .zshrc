@@ -40,9 +40,9 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git github jira mercurial osx python redis-cli svn tmux vim virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/bwilliams/.rbenv/shims:/Users/bwilliams/.nave/installed/0.10.4/bin:/Users/bwilliams/.dotfiles/bin:/usr/local/rvm/bin:/Users/bwilliams/.dotfiles/libs/rbenv/bin:/Users/bwilliams/.dotfiles/libs/ruby-build/bin
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
