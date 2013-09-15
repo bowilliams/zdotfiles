@@ -45,4 +45,17 @@ plugins=(git github jira mercurial osx python redis-cli svn tmux vim virtualenv)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# http://www.drbunsen.org/the-text-triumvirate
+
+export EDITOR="vim"
+bindkey -v 
+
+# vi style incremental search
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward
+
+setopt AUTO_CD

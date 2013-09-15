@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# inits brew and git, and installs everything zsh
+
 function to_install() {
   local desired installed
   local -A remain
@@ -20,19 +22,17 @@ function to_install() {
 # fi
 
 # Install Homebrew.
-if test ! $(which brew)
-then
+if ! (( $+commands[brew] )) ; then
   echo "Installing Homebrew"
   true | /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
 
-if test $(which brew)
-then
+if (( $+commands[brew] )) ; then
   echo "Updating Homebrew"
   brew update
 
   # Install Homebrew recipes.
-  recipes="git tree lesspipe git-extras htop-osx man2html macvim svn tmux reattach-to-user-namespace"
+  recipes="git irssi markdown mercurial mysql ncftp redis tree lesspipe git-extras htop-osx man2html macvim svn tmux reattach-to-user-namespace"
 
   list="$(to_install "$recipes" "$(brew list | awk '{printf "%s ",$0} END {print ""}')")"
   if [[ -n "$list" ]] then
@@ -40,15 +40,12 @@ then
     brew install $list
   fi
 
-  if test ! $(which gcc-4.2)
-  then
-    echo "Installing Homebrew dupe recipe: apple-gcc42"
-    brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
-  fi
 fi
 
 # now that we have git, we can clone dotfiles
-git clone git@github.com:bowilliams/zdotfiles.git
+if [[ ! -d $HOME/zdotfiles ]] then
+  git clone git@github.com:bowilliams/zdotfiles.git
+fi
 
 # install oh-my-zsh if it's not there already
 if [[ ! -e $HOME/.oh-my-zsh/ ]] then
@@ -58,4 +55,4 @@ fi
 # link zshrc
 if [[ ! -e $HOME/.zshrc ]] then
   ln -s $HOME/zdotfiles/.zshrc $HOME/.zshrc
-fi 
+fi

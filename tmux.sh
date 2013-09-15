@@ -1,0 +1,1 @@
+ln -s $HOME/zdotfiles/.tmux.conf $HOME/.tmux.conf
