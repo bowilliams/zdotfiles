@@ -43,10 +43,12 @@ if [[ -e /usr/local/bin/brew ]] ; then
 
   list="$(to_install "$recipes" "$(brew list | awk '{printf "%s ",$0} END {print ""}')")"
   if [[ -n "$list" ]] then
-    echo "Installing Homebrew recipes: $list"
-    brew install $list
+    for cmd in $=list
+    do
+      echo "Installing Homebrew recipe: $cmd"
+      brew install $cmd
+    done
   fi
-
 fi
 
 # now that we have git, we can clone dotfiles
