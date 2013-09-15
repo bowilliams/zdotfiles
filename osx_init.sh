@@ -21,6 +21,13 @@ function to_install() {
 #   sudo xcode-select -switch /usr/bin
 # fi
 
+# make sure command line tools are installed first!
+if ! [[ -e /usr/bin/clang ]] ; then
+  echo "INSTALL COMMAND LINE TOOLS"
+  echo "https://developer.apple.com/downloads/"
+  exit
+fi
+
 # Install Homebrew.
 if ! [[ -e /usr/local/bin/brew ]] ; then
   echo "Installing Homebrew"
