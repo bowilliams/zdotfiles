@@ -19,7 +19,9 @@ fi
 if [[ ! -d gist-vim ]] then 
   git clone git@github.com:mattn/gist-vim.git
 fi
-
+if [[ ! -d vim-colors-serialized ]] then
+    git clone git@github.com:altercation/vim-colors-solarized.git
+fi
 # setup gist
 git config --global github.user bowilliams@gmail.com
 

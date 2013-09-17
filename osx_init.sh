@@ -28,6 +28,13 @@ if ! [[ -e /usr/bin/clang ]] ; then
   exit
 fi
 
+# warn that full xcode needs to be installed for macvim
+if ! [[ -d /Applications/XCode.app/ ]] ; then
+  echo "XCode is not installed - macvim installation will fail. Proceed anyway?"
+  read -s -n 1 any_key
+  echo "Proceeding..."
+fi
+
 # Install Homebrew.
 if ! [[ -e /usr/local/bin/brew ]] ; then
   echo "Installing Homebrew"
@@ -51,7 +58,21 @@ if [[ -e /usr/local/bin/brew ]] ; then
   fi
 fi
 
-# now that we have git, we can clone dotfiles
+# change path so we got our nice new git install
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# now that we have git, we can clone dotfiles, but we need to
+# get credentials set up first
+# set up an ssh key
+if ! [[ -e $HOME/.ssh/id_rsa.pub ]] ; then
+  ssh-keygen
+fi
+pbcopy < $HOME/.ssh/id_rsa.pub
+echo "Please set up an SSH key at https://github.com/settings/ssh"
+echo "Your SSH key has been copied into the clipboard"
+echo "Press any key to proceed once you are done..."
+read -s -n 1 any_key
+echo "Proceeding..."  
 if [[ ! -d $HOME/zdotfiles ]] then
   git clone git@github.com:bowilliams/zdotfiles.git
 fi
@@ -65,3 +86,5 @@ fi
 if [[ ! -e $HOME/.zshrc ]] then
   ln -s $HOME/zdotfiles/.zshrc $HOME/.zshrc
 fi
+
+
