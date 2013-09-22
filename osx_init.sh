@@ -41,6 +41,10 @@ if ! [[ -e /usr/local/bin/brew ]] ; then
   true | /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
 
+echo "time to call brew doctor, press any key when ready to continue..."
+read -s -n 1 any_key
+echo "Proceeding..."
+
 if [[ -e /usr/local/bin/brew ]] ; then
   echo "Updating Homebrew"
   brew update
@@ -73,6 +77,7 @@ echo "Your SSH key has been copied into the clipboard"
 echo "Press any key to proceed once you are done..."
 read -s -n 1 any_key
 echo "Proceeding..."  
+
 if [[ ! -d $HOME/zdotfiles ]] then
   git clone git@github.com:bowilliams/zdotfiles.git
 fi
@@ -87,4 +92,5 @@ if [[ ! -e $HOME/.zshrc ]] then
   ln -s $HOME/zdotfiles/.zshrc $HOME/.zshrc
 fi
 
+echo "manually install iterm2, solarized theme, and fonts in ~/zdotfiles/fonts"
 
